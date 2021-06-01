@@ -33,7 +33,7 @@ users has_many  purchase_records
 
 Association
 items belongs_to user                           (belongs_toは単数形)
-items has_one shipping-address
+items has_one purchase_record
 
 ##commentテーブル
 | Column   | Type       | Options     |
@@ -46,7 +46,7 @@ Association
 comment belongs_to user
 comment belongs_to item
 
-##shipping-addressテーブル(配送先or住所テーブル)
+##shipping_addressテーブル(配送先or住所テーブル)
 | Column          | Type       | Options     |
 | --------------- | ------     | ----------- |
 | post_code       | string     | NOT NULL    |（郵便番号）
@@ -68,6 +68,6 @@ shipping-address belongs_one purchase-record
 | item           | references| foreign_key |
 
 Association
-purchase-record belongs_one user
-purchase-record belongs_one item
-purchase-record has_one shipping-address
+purchase_record belongs_one user
+purchase_record belongs_one item
+purchase_record has_one shipping_address
