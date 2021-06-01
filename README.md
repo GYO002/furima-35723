@@ -32,7 +32,7 @@ users has_many  purchase_records
 | user            | references | foreign_key |（外部キー）
 
 Association
-items belong_to user                           (belong_toは単数形)
+items belongs_to user                           (belongs_toは単数形)
 items has_one shipping-address
 
 ##commentテーブル
@@ -43,8 +43,8 @@ items has_one shipping-address
 | item     | references | foreign_key |（外部キー制約）
 
 Association
-comment belong_to users
-comment belong_to items
+comment belongs_to user
+comment belongs_to item
 
 ##shipping-addressテーブル(配送先or住所テーブル)
 | Column          | Type       | Options     |
@@ -58,7 +58,7 @@ comment belong_to items
 | purchase_record | references ｜ foreign_key |（商品購入記録の外部キー）
 
 Association
-shipping-address belong_one purchase-record
+shipping-address belongs_one purchase-record
 
 
 ##purchase_recordテーブル(商品購入記録)
@@ -68,6 +68,6 @@ shipping-address belong_one purchase-record
 | item           | references| foreign_key |
 
 Association
-purchase-record belong_one user
-purchase-record belong_one item
+purchase-record belongs_one user
+purchase-record belongs_one item
 purchase-record has_one shipping-address
