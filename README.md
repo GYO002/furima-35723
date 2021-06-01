@@ -1,13 +1,13 @@
 # README
 
 ##usersテーブル
-| Column    | Type     | Options     |
-| --------  | ------   | ----------- |
-| nickname  | string   | NOT NULL    |
-| mail      | string   | NOT NULL    |
-| password  | string   | NOT NULL    |
-| name      | text     | NOT NULL    |
-| birthday  | datetime | NOT NULL    |
+| Column             | Type     | Options     |
+| --------           | ------   | ----------- |
+| nickname           | string   | NOT NULL    |（ニックネーム）
+| email              | string   | NOT NULL    |（メールアドレス）
+| encrypted_password | string   | NOT NULL    |（パスワード）
+| name               | text     | NOT NULL    |（名前）
+| birthday           | date     | NOT NULL    |（生年月日）
 
 Association
 users has_many items
@@ -19,15 +19,15 @@ users has_one  credit-card
 ##itemsテーブル
 | Column         | Type       | Options     |
 | -------------- | ---------- | ----------- |
-| product-name   | string     | NOT NULL    |
-| image          | text       | NOT NULL    |
-| description    | string     | NOT NULL    |
-| category       | string     | NOT NULL    |
-| status         | string     | NOT NULL    |
-| burden         | string     | NOT NULL    |
-| area           | string     | NOT NULL    |
-| delivery-days  | datetime   | NOT NULL    |
-| price          | integer    | NOT NULL    |
+| product-name   | string     | NOT NULL    |(商品名)
+| description    | text       | NOT NULL    |（商品説明）
+| category       | string     | NOT NULL    |（カテゴリ）
+| status         | integer    | NOT NULL    |（商品の状態）
+| burden         | integer    | NOT NULL    |（配送の負担）
+| area           | integer    | NOT NULL    |（配送元の地域）
+| delivery-days  | integer    | NOT NULL    |（配送までの日数）
+| price          | integer    | NOT NULL    |（価格）
+| user           | references | NOT NULL    |（外部キー）
 
 Association
 items belong_to users
@@ -37,8 +37,8 @@ items has_one shipping-address
 | Column   | Type      | Options     |
 | -------- | ----------| ----------- |
 | text     | text      | NOT NULL    |
-| user     | string    | NOT NULL    |
-| prototype| string    | NOT NULL    |
+| user     | reference | NOT NULL    |
+| item     | reference | NOT NULL    |
 
 Association
 comment belong_to users
@@ -47,24 +47,23 @@ comment belong_to items
 ##shipping-addressテーブル
 | Column         | Type     | Options     |
 | -------------- | ------   | ----------- |
-| post-code      | string   | NOT NULL    |
-| prefectures    | string   | NOT NULL    |
-| municipalities | string   | NOT NULL    |
-| address        | text     | NOT NULL    |
-| building| text | string   | NOT NULL    |
-| phone-number   | integer  | NOT NULL    |
+| post-code      | string   | NOT NULL    |（郵便番号）
+| prefectures    | integer  | NOT NULL    |（都道府県）
+| municipalities | string   | NOT NULL    |（市町村）
+| address        | text     | NOT NULL    |（番地）
+| building       | text     | NOT NULL    |（建物名）
+| phone-number   | string   | NOT NULL    |（携帯電話）
 
 Association
 shipping-address belong_one users
 shipping-address belong_one items
 
-
-##credit-cardテーブル
-| Column             | Type    | Options     |
-| ------------------ | ------- | ----------- |
-| card-information   | string  | NOT NULL    |
-| expiration-date    | string  | NOT NULL    |
+##purchase-recordテーブル(商品購入記録)
+| Column         | Type     | Options     |
+| -------------- | ------   | ----------- |
+| user           | reference| NOT NULL    |
+| item           | reference| NOT NULL    |
 
 Association
-comment belong_to users
-
+purchase-record has_one user
+purchase-record has_one item
