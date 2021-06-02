@@ -58,7 +58,7 @@ comment belongs_to item
 | purchase_record | references ｜ foreign_key |（商品購入記録の外部キー）
 
 Association
-shipping-address belongs_one purchase-record
+shipping-address belongs_to purchase-record
 
 
 ##purchase_recordテーブル(商品購入記録)
@@ -68,6 +68,6 @@ shipping-address belongs_one purchase-record
 | item           | references| foreign_key |
 
 Association
-purchase_record belongs_one user
-purchase_record belongs_one item
+purchase_record belongs_to user
+purchase_record belongs_to item
 purchase_record has_one shipping_address
