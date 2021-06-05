@@ -5,8 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # ニックネームと誕生日のバリデーション
-  validates :nickname, presence: true
-  validates :birthday, presence: true
+  with_options presence: true do
+   validates :nickname
+   validates :birthday
+  end
 
   # 名前のバリテーション（姓名）
   with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: '全角文字を使用してください' } do
