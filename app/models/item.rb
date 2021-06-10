@@ -14,22 +14,21 @@ class Item < ApplicationRecord
     validates :description
     validates :category_id
     validates :status_id
+    validates :burden_id
     validates :area_id
     validates :delivery_day_id
     validates :price
+    validates :image
   end
 
-  with_options numericality: { other_than: 1 } do
-    validates :product_name
-    validates :description
+  with_options numericality: { other_than: 0 } do
     validates :category_id
     validates :status_id
+    validates :burden_id
     validates :area_id
     validates :delivery_day_id
     validates :price
   end
-
-  validates :area_id, numericality: { other_than: 0 }
 
   validates_inclusion_of :price, in: 300..9999999, message: "半角¥300~¥9,999,999の間でお願いします"
   validates :price, numericality: { only_integer: true }
