@@ -27,7 +27,6 @@ class Item < ApplicationRecord
     validates :burden_id
     validates :area_id
     validates :delivery_day_id
-    validates :price
   end
 
   validates_inclusion_of :price, in: 300..9999999, message: "半角¥300~¥9,999,999の間でお願いします"
