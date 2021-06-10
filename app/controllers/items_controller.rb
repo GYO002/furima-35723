@@ -6,12 +6,12 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @iteme = Item.new
+    @item = Item.new
   end
 
   def create
     @item = Item.new(item_params)
-    if @prototype.save
+    if @item.save
       redirect_to root_path
     else
       render :new
