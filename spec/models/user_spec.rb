@@ -8,13 +8,13 @@ RSpec.describe User, type: :model do
   describe '新規登録/ユーザー情報' do
     context '新規登録ができる時' do
       it '新規登録ができるとき' do
-      @user = FactoryBot.build(:user)
-      @user.valid?
+        @user = FactoryBot.build(:user)
+        @user.valid?
+      end
     end
-   end
   end
 
-    context '新規登録ができない時' do
+  context '新規登録ができない時' do
     it 'ニックネームが必須であること' do
       @user.nickname = ''
       @user.valid?

@@ -8,8 +8,8 @@ class User < ApplicationRecord
 
   # ニックネームと誕生日のバリデーション
   with_options presence: true do
-   validates :nickname
-   validates :birthday
+    validates :nickname
+    validates :birthday
   end
 
   # 名前のバリテーション（姓名）
