@@ -8,7 +8,6 @@ class Item < ApplicationRecord
   belongs_to :delivery
   belongs_to :status
 
-  
   with_options presence: true do
     validates :product_name
     validates :description
@@ -29,7 +28,6 @@ class Item < ApplicationRecord
     validates :delivery_day_id
   end
 
-  validates_inclusion_of :price, in: 300..9999999, message: "半角¥300~¥9,999,999の間でお願いします"
+  validates_inclusion_of :price, in: 300..9_999_999, message: '半角¥300~¥9,999,999の間でお願いします'
   validates :price, numericality: { only_integer: true }
-
-  end
+end
