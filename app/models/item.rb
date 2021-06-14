@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   belongs_to :area
   belongs_to :burden
   belongs_to :category
-  belongs_to :delivery
+  belongs_to :delivery_day
   belongs_to :status
 
   with_options presence: true do
