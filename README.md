@@ -46,7 +46,7 @@ Association
 comment belongs_to user
 comment belongs_to item
 
-##shipping_addressテーブル(配送先or住所テーブル)
+##addressテーブル(配送先or住所テーブル)
 | Column          | Type       | Options     |
 | --------------- | ------     | ----------- |
 | post_code       | string     | null: false |（郵便番号）
@@ -61,7 +61,7 @@ Association
 shipping-address belongs_to purchase_record
 
 
-##purchase_recordテーブル(商品購入記録)
+##purchaseテーブル(商品購入記録)
 | Column         | Type      | Options     |
 | -------------- | ----------| ----------- |
 | user           | references| foreign_key |
