@@ -55,10 +55,10 @@ comment belongs_to item
 | address         | string     | null: false |（番地）
 | building        | string     |             |（建物名）※任意のためNOT NULL
 | phone_number    | string     | null: false |（携帯電話）
-| purchase_record | references ｜ foreign_key |（商品購入記録の外部キー）
+| purchase        | references ｜ foreign_key |（商品購入記録の外部キー）
 
 Association
-shipping-address belongs_to purchase_record
+shipping-address belongs_to purchase
 
 
 ##purchaseテーブル(商品購入記録)

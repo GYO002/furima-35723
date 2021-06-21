@@ -1,6 +1,6 @@
 class PurchaseAddress
   include ActiveModel::Model
-  attr_accessor :post_code, :area_id, :municipalities, :address_id, :building, :phone_number, :user_id, :item_id
+  attr_accessor :post_code, :area_id, :municipalities, :address_id, :building, :phone_number, :user_id, :item_id,:token
 
   #【配送先のバリデーション】
  
@@ -10,6 +10,7 @@ class PurchaseAddress
     validates :municipalities
     validates :address_id
     validates :phone_number
+    validates :token
 
   end
   #郵便番号の保存には、ハイフンが必須であること
@@ -25,9 +26,9 @@ class PurchaseAddress
 
   def save
     #購入履歴を保存する
-    Purchase.create(user_id: user_id, item_id: item_id)
+    purchase = Purchase.create(user_id: user_id, item_id: item_id)
     # 住所を保存する
-    Address.create(post_code: post_code, area_id: area_id, municipalities: municipalities, address_id: address_id, building: building, phone_number: phone_number)
+    Address.create(post_code: post_code, area_id: area_id, municipalities: municipalities, address_id: address_id, building: building, phone_number: phone_number,purchase_id: purchase.id)
   end
 
 
