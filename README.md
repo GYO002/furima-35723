@@ -33,7 +33,7 @@ users has_many  purchase_records
 
 Association
 items belongs_to user                           (belongs_toは単数形)
-items has_one purchase_record
+items has_one purchase
 
 ##commentテーブル
 | Column   | Type       | Options     |
