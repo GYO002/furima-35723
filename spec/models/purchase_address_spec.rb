@@ -11,6 +11,11 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address = FactoryBot.build(:purchase_address)
         @purchase_address.valid?
       end
+
+      it 'buildingが空でも登録できる' do
+        @purchasea_address.building = ''
+        @purchasea_address.valid?
+      end
     end
   end
 
@@ -61,6 +66,13 @@ RSpec.describe PurchaseAddress, type: :model do
 
       it '電話番号は11桁以内の数値のみ保存可能なこと（09012345678）' do
         @purchasea_address.phone_number = '000000000000'
+        @purchasea_address.valid?
+        #binding.pry
+        expect(@purchasea_address.errors.full_messages).to include "User can't be blank"
+      end
+
+      it '電話番号は10桁以上の数値のみ保存可能なこと（09012345678）' do
+        @purchasea_address.phone_number = '000000000'
         @purchasea_address.valid?
         #binding.pry
         expect(@purchasea_address.errors.full_messages).to include "User can't be blank"

@@ -1,8 +1,8 @@
 class PurchasesController < ApplicationController
-  before_action :set_item, only: [:index]
-  before_action :authenticate_user!, only: [:index]
-  before_action :contributor_confirmation, only: [:index]
-  before_action :buyer_confirmation, only: [:index]
+  before_action :set_item, only: [:index, :create]
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :contributor_confirmation, only: [:index, :create]
+  before_action :buyer_confirmation, only: [:index, :create]
 
   def index
     @purchase_address = PurchaseAddress.new
@@ -11,9 +11,7 @@ class PurchasesController < ApplicationController
   
     def create
     @purchase_address = PurchaseAddress.new(puschase_address_params)
-    @item = Item.find(params[:item_id])
       if @purchase_address.valid?
-        #Payjp.api_key = "sk_test_9306cc0adf090c74bb27ca4a"  # 自身のPAY.JPテスト秘密鍵を記述しましょう
         Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
         Payjp::Charge.create(
         amount: @item.price,  # 商品の値段
