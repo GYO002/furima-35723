@@ -1,8 +1,11 @@
 class PurchasesController < ApplicationController
+  before_action :set_item, only: [:index]
+  before_action :authenticate_user!, only: [:index]
+  before_action :contributor_confirmation, only: [:index]
+  before_action :buyer_confirmation, only: [:index]
 
   def index
     @purchase_address = PurchaseAddress.new
-    @item = Item.find(params[:item_id])
    end
  
   
@@ -31,7 +34,20 @@ class PurchasesController < ApplicationController
       params.require(:purchase_address).permit(:post_code, :area_id, :municipalities, :address_id, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id]).merge(token: params[:token])
     end
 
-  
+    def set_item
+      @item = Item.find(params[:item_id])
+    end
+
+    def contributor_confirmation
+      redirect_to root_path if current_user == @item.user
+    end
+
+    def buyer_confirmation
+      redirect_to root_path if @item.present?
+      #ログインした時に遷移先の商品が売却済みだったら
+
+    end
+
 end
 
 
