@@ -16,7 +16,7 @@ class PurchaseAddress
   end
   #郵便番号の保存には、ハイフンが必須であること
   validates :post_code, format: { with: /\A\d{3}[-]\d{4}\z/, massage: 'ハイフンを使用して下さい' }
-  validates :phone_number, format: { with: /\d{10,11}/, massage: '10文字以上、11文字以内にして下さい' }
+  validates :phone_number, format: { with: /\A\d{10,11}\z/, massage: '10文字以上、11文字以内にして下さい' }
 
 
 

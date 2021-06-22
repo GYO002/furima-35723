@@ -12,14 +12,9 @@ class PurchasesController < ApplicationController
     def create
     @purchase_address = PurchaseAddress.new(puschase_address_params)
       if @purchase_address.valid?
-        Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-        Payjp::Charge.create(
-        amount: @item.price,  # 商品の値段
-        card: puschase_address_params[:token],    # カードトークン
-        currency: 'jpy'                 # 通貨の種類（日本円）
-      )
-          @purchase_address.save
-          redirect_to root_path
+        pay_item
+        @purchase_address.save
+        redirect_to root_path
         else
         render :index
       end
@@ -43,7 +38,15 @@ class PurchasesController < ApplicationController
     def buyer_confirmation
       redirect_to root_path if @item.present?
       #ログインした時に遷移先の商品が売却済みだったら
+    end
 
+    def pay_item
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+        Payjp::Charge.create(
+        amount: @item.price,  
+        card: puschase_address_params[:token],    
+        currency: 'jpy'                 
+      )
     end
 
 end
