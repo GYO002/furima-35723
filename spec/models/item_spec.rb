@@ -8,8 +8,7 @@ RSpec.describe Item, type: :model do
   describe '商品出品' do
     context '商品出品ができる時' do
       it '商品出品ができる時' do
-        @item = FactoryBot.build(:item)
-        @item.valid?
+        expect(@item).to be_valid
       end
     end
   end
