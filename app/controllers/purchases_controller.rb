@@ -2,7 +2,6 @@ class PurchasesController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!, only: [:index, :create]
   before_action :contributor_confirmation, only: [:index, :create]
-  before_action :buyer_confirmation, only: [:index, :create]
 
   def index
     @purchase_address = PurchaseAddress.new
@@ -32,13 +31,9 @@ class PurchasesController < ApplicationController
     end
 
     def contributor_confirmation
-      redirect_to root_path if current_user == @item.user
+      redirect_to root_path if current_user == @item.user || @item.purchase.present?
     end
 
-    def buyer_confirmation
-      redirect_to root_path if @item.present?
-      #ログインした時に遷移先の商品が売却済みだったら
-    end
 
     def pay_item
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
